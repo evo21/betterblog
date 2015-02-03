@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def index
     #@posts = user.posts
 
-    @posts = Post.all
+    @posts = Post.where(:user_id => params[:user_id])
   end
 
   # GET /posts/1
@@ -77,7 +77,7 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.all.where(:user_id => params[:user_id])
     end
 
     def set_user
