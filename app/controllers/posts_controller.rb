@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def index
     #@posts = user.posts
 
-    @posts = Post.where(:user_id => params[:user_id])
+    @posts = @user.posts
   end
 
   # GET /posts/1
