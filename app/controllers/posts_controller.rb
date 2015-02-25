@@ -21,7 +21,6 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-
     @post = Post.new
     render :new
   end
@@ -36,8 +35,9 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     # we want to add the user_id to the post params in the params hash
-    params[:post][:user_id] = params[:user_id]
+    # params[:post][:user_id] = params[:user_id]
     @post = Post.new(post_params)
+    @post.user_id = params[:user_id]
 
     respond_to do |format|
       if @post.save
@@ -69,7 +69,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to user_posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to [@user, @post], notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -77,7 +77,7 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.all.where(:user_id => params[:user_id])
+      @post = Post.find(params[:id])
     end
 
     def set_user
