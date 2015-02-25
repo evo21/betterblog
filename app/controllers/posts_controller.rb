@@ -4,13 +4,9 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    #@posts = user.posts
-
     @posts = @user.posts
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
     respond_to do |format|
@@ -25,14 +21,11 @@ class PostsController < ApplicationController
     render :new
   end
 
-  # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
     render :edit
   end
 
-  # POST /posts
-  # POST /posts.json
   def create
     # we want to add the user_id to the post params in the params hash
     # params[:post][:user_id] = params[:user_id]
@@ -48,10 +41,8 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
-  end
+  endrails
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
       if @post.update(post_params)
@@ -64,8 +55,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
     @post.destroy
     respond_to do |format|
